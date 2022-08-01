@@ -1,0 +1,15 @@
+{
+    "id": "tebex",
+    "name": "Tebex",
+    "description": "An Tebex plugin to view your packages from your Azuriom website!",
+    "version": "1.0.0",
+    "url": "https://azuriom.com",
+    "authors": [
+        "MazBaz | mazbaz.fr"
+    ],
+    "azuriom_api": "1.0.0",
+    "providers": [
+        "\\Azuriom\\Plugin\\Tebex\\Providers\\TebexServiceProvider",
+        "\\Azuriom\\Plugin\\Tebex\\Providers\\RouteServiceProvider"
+    ]
+}
