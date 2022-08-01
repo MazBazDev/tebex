@@ -9,8 +9,9 @@ return [
     'welcome' => 'Welcome on the shop',
 
     'buy' => 'Acheter',
-
     'free' => 'Gratuit',
+    'mc_pseudo' => 'Quelle est votre pseudo Minecraft ?',
+    "bad_username" => "Pseudo incorrect",
 
     'fields' => [
         'price' => 'Prix',

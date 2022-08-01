@@ -95,7 +95,7 @@ $y = 0;
     function openProductModal(product_id) {
 
         Swal.fire({
-            title: 'Quelle est votre pseudo Minecraft ?',
+            title: "{{ trans('tebex::messages.mc_pseudo') }}",
             input: 'text',
             inputAttributes: {
                 autocapitalize: 'off',
@@ -105,11 +105,11 @@ $y = 0;
             showCancelButton: true,
             reverseButtons: true,
             inputValue: pseudo,
-            confirmButtonText: 'Acheter',
+            confirmButtonText: "{{ trans('tebex::messages.buy') }}",
             showLoaderOnConfirm: true,
             inputValidator: (value) => {
                 if (value.length < 3) {
-                    return 'Pseudo incorrect'
+                    return "{{ trans('tebex::messages.bad_username') }}"
                 }
             },
             preConfirm: (username) => {
