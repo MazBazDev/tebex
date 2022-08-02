@@ -13,14 +13,7 @@ use Azuriom\Plugin\Tebex\Resources\Currencies;
 | to prevent any side effect.
 |
 */
-
-if (! function_exists('tebexMode')) {
-    function tebexMode()
-    {
-        return setting('tebex.active');
-    }
-}
-
+ 
 if (! function_exists('tebex_currency')) {
     function tebex_currency()
     {

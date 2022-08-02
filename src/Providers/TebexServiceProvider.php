@@ -23,8 +23,7 @@ class TebexServiceProvider extends BasePluginServiceProvider
      * @var array
      */
     protected array $middlewareGroups = [
-        'TebexActive' => \Azuriom\Plugin\Tebex\Middleware\TebexActive::class, 
-        'TebexAdminActive' => \Azuriom\Plugin\Tebex\Middleware\TebexAdminActive::class,
+        
     ];
 
     /**

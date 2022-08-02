@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Plugin home')
+@section('title', setting("tebex.shop.title", trans("tebex::messages.shop")))
 
 @section('content')
 
@@ -10,6 +10,13 @@ $y = 0;
 @endphp
 
 <div class="row">
+    <div class="mb-3">
+        <h1>{{ setting("tebex.shop.title", trans("tebex::messages.shop") )}}</h1>
+
+        @if(setting("tebex.shop.subtitle"))
+            <h4>{{ setting("tebex.shop.subtitle") }}</h4>
+        @endif 
+    </div>
     <div class="col-lg-3">
         <div class="list-group mb-3" role="tablist">
             @foreach($categories as $categorie)
@@ -44,7 +51,7 @@ $y = 0;
                                 </h5>
 
                                 <button class="btn btn-primary btn-block" onclick="openProductModal(`{{ $package->id }}`)">
-                                    {{ trans('tebex::messages.buy') }}
+                                    {{ trans('tebex::messages.packages.buy') }}
                                 </button>
                             </div>
                         </div>
@@ -95,7 +102,7 @@ $y = 0;
     function openProductModal(product_id) {
 
         Swal.fire({
-            title: "{{ trans('tebex::messages.mc_pseudo') }}",
+            title: "{{ trans('tebex::messages.modal.mc_pseudo') }}",
             input: 'text',
             inputAttributes: {
                 autocapitalize: 'off',
@@ -105,11 +112,11 @@ $y = 0;
             showCancelButton: true,
             reverseButtons: true,
             inputValue: pseudo,
-            confirmButtonText: "{{ trans('tebex::messages.buy') }}",
+            confirmButtonText: "{{ trans('tebex::messages.packages.buy') }}",
             showLoaderOnConfirm: true,
             inputValidator: (value) => {
                 if (value.length < 3) {
-                    return "{{ trans('tebex::messages.bad_username') }}"
+                    return "{{ trans('tebex::messages.modal.bad_username') }}"
                 }
             },
             preConfirm: (username) => {

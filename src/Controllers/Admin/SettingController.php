@@ -24,6 +24,8 @@ class SettingController extends Controller
             'tebex_currencies' => Currencies::all(),
             'tebex_current_currency' => setting('tebex.currency', 'USD'),
             'tebex_key' => setting('tebex.key', ''),
+            'tebex_shop_title' => setting('tebex.shop.title', ''),
+            'tebex_shop_subtitle' => setting('tebex.shop.subtitle', ''),
         ]);
     }
 
@@ -48,9 +50,10 @@ class SettingController extends Controller
 
         if ($response->successful()) {
             Setting::updateSettings([
-                'tebex.active' => $request->has('tebex_active'),
                 'tebex.key' => $request->input('tebex_key'),
-                'tebex.currency' => $request->input('tebex_currency')
+                'tebex.currency' => $request->input('tebex_currency'),
+                'tebex.shop.title' => $request->input('tebex_title'),
+                'tebex.shop.subtitle' => $request->input('tebex_subtitle'),
             ]);
 
             return redirect()->route('tebex.admin.index')
