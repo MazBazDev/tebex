@@ -7,7 +7,7 @@
     "authors": [
         "MazBaz | mazbaz.fr"
     ],
-    "azuriom_api": "1.0.0",
+    "azuriom_api": "1.0.1",
     "providers": [
         "\\Azuriom\\Plugin\\Tebex\\Providers\\TebexServiceProvider",
         "\\Azuriom\\Plugin\\Tebex\\Providers\\RouteServiceProvider"
