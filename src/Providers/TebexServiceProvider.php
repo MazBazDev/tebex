@@ -89,11 +89,9 @@ class TebexServiceProvider extends BasePluginServiceProvider
      */
     protected function routeDescriptions()
     {
-        if(tebexMode()) {
-            return [
-                $this->plugin->id.'.index' => trans('Tebex - Accueil'),
-            ];
-        }
+        return [
+            $this->plugin->id.'.index' => trans('Tebex - Accueil'),
+        ];
     }
 
     /**
