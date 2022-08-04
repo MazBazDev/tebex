@@ -3,6 +3,7 @@
 return [
     'errors' => [
         'badApiKey' => 'Clé Tebex incorrect',
+        'noApiKey' => 'Vous devez renseigner une clé d\'api Tebex'
     ],
 
     'permission' => 'Gérer le plugin Tebex',

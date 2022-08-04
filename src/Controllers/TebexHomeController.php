@@ -14,6 +14,10 @@ class TebexHomeController extends Controller
      */
     public function index()
     {
+        if(!setting('tebex.key')) {
+            return redirect()->route('home')->with('error', trans('tebex::admin.errors.noApiKey'));
+        }
+
         $rProducts = json_decode(Http::withHeaders(['X-Tebex-Secret' => setting('tebex.key')])->get('https://plugin.tebex.io/packages'));
         $rCategories = json_decode(Http::withHeaders(['X-Tebex-Secret' => setting('tebex.key')])->get('https://plugin.tebex.io/listing'));
         $rSales = json_decode(Http::withHeaders(['X-Tebex-Secret' => setting('tebex.key')])->get('https://plugin.tebex.io/sales'));
