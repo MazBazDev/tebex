@@ -3,7 +3,6 @@
 namespace Azuriom\Plugin\Tebex\Controllers\Admin;
 
 use Azuriom\Models\Setting;
-use Illuminate\Support\Arr;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;

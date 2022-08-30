@@ -55,7 +55,7 @@
                 <div class="row gy-4">
                     @forelse($categorie->packages as $package)
                         <div class="col-md-4">
-                            <div class="card h-100 py-2" onclick="showModal('{{ $package->name }}', '{{ $package->description }}', '{{ $package->id }}', '{{ $package->price->discounted ? $package->price->discounted . tebex_currency_symbol() : $package->price->normal . tebex_currency_symbol() }}')">
+                            <div class="card h-100 py-2" onclick="showModal('{{ $package->name }}', '{!! $package->description !!}', '{{ $package->id }}', '{{ $package->price->discounted ? $package->price->discounted . tebex_currency_symbol() : $package->price->normal . tebex_currency_symbol() }}')">
                                 @if($package->image)
                                     <img class="card-img-top" draggable="false" src="{{ $package->image }}" alt="{{ $package->name }}">
                                 @endif

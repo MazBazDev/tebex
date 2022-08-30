@@ -34,9 +34,9 @@ class TebexHomeController extends Controller
                         
                         $product = (object) [
                             'id' => $Product->id,
-                            'name' => $Product->name,
+                            'name' => str_replace("'", "\'", $Product->name),
                             'image' => $Product->image,
-                            'description' => $Product->description,
+                            'description' => str_replace("'", "\'", $Product->description),
                             "price" => (object) array(
                                 "normal" => $Product->price,
                                 "discounted" => null,
@@ -94,9 +94,9 @@ class TebexHomeController extends Controller
                         if($Product->id == $subpackages->id && !$Product->disabled) {
                             $product = (object) [
                                 'id' => $Product->id,
-                                'name' => $Product->name,
+                                'name' => str_replace("'", "\'", $Product->name),
                                 'image' => $Product->image,
-                                'description' => $Product->description,
+                                'description' => str_replace("'", "\'", $Product->description),
                                 "price" => (object) array(
                                     "normal" => $Product->price,
                                     "discounted" => null,
