@@ -15,10 +15,18 @@ return [
         'empty' => 'Aucun produit',
         'buy' => 'Acheter',
         'free' => 'Gratuit',
+        'show' => 'Voir',
+        'cancel' => 'Annuler'
     ],
 
     'modal' => [
         'mc_pseudo' => 'Quelle est votre pseudo ?',
         "bad_username" => "Pseudo incorrect",
-    ]
+    ],
+    'home' => [
+        'home' => 'Accueil',
+        'toogle' => 'Activer la page d\'accueil de la boutique',
+        'title' => 'Contenu de la page d\'accueil',
+        'placeholder' => 'Bienvenue sur la boutique !'
+    ],
 ];

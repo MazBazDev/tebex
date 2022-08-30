@@ -18,41 +18,39 @@ class TebexHomeController extends Controller
             return redirect()->route('home')->with('error', trans('tebex::admin.errors.noApiKey'));
         }
 
-        $rProducts = json_decode(Http::withHeaders(['X-Tebex-Secret' => setting('tebex.key')])->get('https://plugin.tebex.io/packages'));
+        $rProducts = json_decode(Http::withHeaders(['X-Tebex-Secret' => setting('tebex.key')])->get('https://plugin.tebex.io/packages?verbose=true'));
         $rCategories = json_decode(Http::withHeaders(['X-Tebex-Secret' => setting('tebex.key')])->get('https://plugin.tebex.io/listing'));
         $rSales = json_decode(Http::withHeaders(['X-Tebex-Secret' => setting('tebex.key')])->get('https://plugin.tebex.io/sales'));
-
         $categories = array();
-        $sales = array();
+        $sales = array();  
+ 
+        foreach($rCategories->categories as $cate) {
+            $packages = [];
+            $subCategories = [];
 
-        foreach ($rCategories as $cat) {
-            foreach ($cat as $ca) {
-                $data = (object) array(
-                    "id" =>  $ca->id,
-                    "name" => $ca->name,
-                    "packages" => array(),
-                );
-
-                foreach ($rProducts as $pro) {
-                    if ($pro->category->id == $ca->id && !$pro->disabled) {
-                        $product = (object) array(
-                            "id" => $pro->id,
-                            "name" => $pro->name,
-                            "image" => $pro->image,
+            foreach($cate->packages as $catPackages) { 
+                foreach($rProducts as $Product) {
+                    if($Product->id == $catPackages->id && !$Product->disabled) {
+                        
+                        $product = (object) [
+                            'id' => $Product->id,
+                            'name' => $Product->name,
+                            'image' => $Product->image,
+                            'description' => $Product->description,
                             "price" => (object) array(
-                                "normal" => $pro->price,
+                                "normal" => $Product->price,
                                 "discounted" => null,
                                 "expire" => null,
                             ),
                             "sales" => array()
-                        );
+                        ];
 
                         foreach ($rSales->data as $sales) {
                             switch ($sales->effective->type) {
-                                case 'package':
+                                case 'package': 
                                     foreach ($sales->effective->packages as $salePackage) {
-                                        if ($salePackage == $pro->id) {
-                                            $price = $sales->discount->type == "percentage" ? $pro->price * ((100 - $sales->discount->percentage) / 100) : $pro->price - $sales->discount->value;
+                                        if ($salePackage == $Product->id) { 
+                                            $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
 
                                             $product->price->discounted = round($price, 2);
                                             $product->price->expire = date('d/m/y H:i:s', $sales->expire);
@@ -63,8 +61,8 @@ class TebexHomeController extends Controller
                                     break;
                                 case 'category':
                                     foreach ($sales->effective->categories as $saleCate) {
-                                        if ($saleCate == $pro->category->id) {
-                                            $price = $sales->discount->type == "percentage" ? $pro->price * ((100 - $sales->discount->percentage) / 100) : $pro->price - $sales->discount->value;
+                                        if ($saleCate == $Product->category->id) {
+                                            $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
 
                                             $product->price->discounted = round($price, 2);
                                             $product->price->expire = date('d/m/y H:i:s', $sales->expire);
@@ -72,28 +70,98 @@ class TebexHomeController extends Controller
                                             array_push($product->sales, $sales->discount); 
                                         }
                                     };
-
                                     break;
                                 case 'all':
-                                    $price = $sales->discount->type == "percentage" ? $pro->price * ((100 - $sales->discount->percentage) / 100) : $pro->price - $sales->discount->value;
+                                    $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
 
                                     $product->price->discounted = round($price, 2);
                                     $product->price->expire = date('d/m/y H:i:s', $sales->expire);
 
                                     array_push($product->sales, $sales->discount); 
-
                                     break;
                             }
                         };
-                        array_push($data->packages, $product);
+
+                        array_push($packages, $product);
                     }
                 }
-                array_push($categories, $data);
             }
-        }
 
-        // return $categories;
+            foreach($cate->subcategories as $catSubCate) {
+                $Subpackages = [];
+                foreach($catSubCate->packages as $subpackages) {
+                    foreach($rProducts as $Product) {
+                        if($Product->id == $subpackages->id && !$Product->disabled) {
+                            $product = (object) [
+                                'id' => $Product->id,
+                                'name' => $Product->name,
+                                'image' => $Product->image,
+                                'description' => $Product->description,
+                                "price" => (object) array(
+                                    "normal" => $Product->price,
+                                    "discounted" => null,
+                                    "expire" => null,
+                                ),
+                                "sales" => array()
+                            ];
+    
+                            foreach ($rSales->data as $sales) {
+                                switch ($sales->effective->type) {
+                                    case 'package': 
+                                        foreach ($sales->effective->packages as $salePackage) {
+                                            if ($salePackage == $Product->id) { 
+                                                $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
+    
+                                                $product->price->discounted = round($price, 2);
+                                                $product->price->expire = date('d/m/y H:i:s', $sales->expire);
+    
+                                                array_push($product->sales, $sales->discount); 
+                                            }
+                                        }
+                                        break;
+                                    case 'category':
+                                        foreach ($sales->effective->categories as $saleCate) {
+                                            if ($saleCate == $Product->category->id) {
+                                                $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
+    
+                                                $product->price->discounted = round($price, 2);
+                                                $product->price->expire = date('d/m/y H:i:s', $sales->expire);
+    
+                                                array_push($product->sales, $sales->discount); 
+                                            }
+                                        };
+                                        break;
+                                    case 'all':
+                                        $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
+    
+                                        $product->price->discounted = round($price, 2);
+                                        $product->price->expire = date('d/m/y H:i:s', $sales->expire);
+    
+                                        array_push($product->sales, $sales->discount); 
+                                        break;
+                                }
+                            };
+                            array_push($Subpackages, $product); 
+                        }
+                    }
+                }
 
+                array_push($subCategories, (object) [
+                    'id' => $catSubCate->id,
+                    'name' => $catSubCate->name,
+                    'packages' => $Subpackages,
+                ]);
+            }
+
+            array_push($categories, (object) [
+                'id' => $cate->id,
+                'name' => $cate->name,
+                'packages' => $packages,
+                'subcategories' => $subCategories
+            ]);
+
+        } 
+        // dd($categories);
         return view('tebex::index', ["categories" => $categories]);
     }
 }

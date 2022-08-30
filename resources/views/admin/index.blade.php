@@ -3,6 +3,9 @@
 @section('title', trans('tebex::admin.title'))
 
 @section('content')
+
+@include('admin.elements.editor')
+
 <div class="card shadow mb-4">
     <div class="card-body">
 
@@ -60,6 +63,20 @@
                     </div>
                 </div> 
             </div>
+            <div class="mb-3 card card-body ">
+                <div class="mb-3 form-check form-switch">
+                    <input type="checkbox" class="form-check-input" id="home_status" name="home_status" @if(setting('tebex.shop.home', true)) checked @endif>
+                    <label class="form-check-label" for="home_status">{{ trans('tebex::messages.home.toogle') }}</label>
+                </div>
+                
+                <label class="form-label" for="home_message">{{ trans('tebex::messages.home.title') }}</label>
+                <textarea class="form-control html-editor @error('maintenance_message') is-invalid @enderror" id="home_message" name="home_message" rows="5">{{ old('home_message', setting('tebex.shop.home.message', trans('tebex::messages.home.placeholder'))) }}</textarea>
+
+                @error('home_message')
+                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+            </div>
+
             
             <button type="submit" class="btn btn-primary">
                 <i class="bi bi-save"></i> {{ trans('messages.actions.save') }}
