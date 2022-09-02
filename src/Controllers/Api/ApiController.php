@@ -29,7 +29,7 @@ class ApiController extends Controller
         if ($response->successful()) {
             return response()->json(['checkout_url' => $data->url], 200);
         } else {
-            return response()->json(['message' => 'Internal Server Error !'], 500);
+            return response()->json(['message' => trans('tebex::admin.errors.nickname')], 500);
         };
     }
 }

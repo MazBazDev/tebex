@@ -3,7 +3,8 @@
 return [
     'errors' => [
         'badApiKey' => 'Wrong Tebex key',
-        'noApiKey' => 'You must enter a Tebex api key'
+        'noApiKey' => 'You must enter a Tebex api key',
+        'nickname' => 'Incorrect pseudo'
     ],
 
     'permission' => 'Manage Tebex Plugin',

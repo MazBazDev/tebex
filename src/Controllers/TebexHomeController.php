@@ -161,7 +161,6 @@ class TebexHomeController extends Controller
             ]);
 
         } 
-        // dd($categories);
         return view('tebex::index', ["categories" => $categories]);
     }
 }
