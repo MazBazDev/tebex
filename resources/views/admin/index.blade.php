@@ -37,7 +37,27 @@
 
                 <small class="form-text">{{ trans('tebex::admin.fields.tebex_key_info') }} <a target='_blank' href="https://docs.tebex.io/store/faq">https://docs.tebex.io/store/faq</a></small>
             </div> 
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="mb-3 form-check form-switch">
+                        <input type="checkbox" class="form-check-input" id="tebex_vat_status" name="tebex_vat_status" @if(setting('tebex.shop.vat.status', false)) checked @endif>
+                        <label class="form-check-label" for="tebex_vat_status">{{ trans('tebex::messages.vat.status') }}</label>
+                    </div>
 
+                    <label class="form-label" for="tebex_vat">{{ trans('tebex::admin.fields.vat') }}</label>
+
+                    <div class="@error('tebex_vat') has-validation @enderror">
+                        <div class="input-group">
+                            <input type="number" min="0" step="0.01" class="form-control @error('tebex_vat') is-invalid @enderror" id="tebex_vat" name="tebex_vat" value="{{ old('tebex_vat', $tebex_shop_vat ?? 0) }}">
+                            <span class="input-group-text">%</span>
+                        </div>
+
+                        @error('tebex_vat')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+                    </div>
+                </div> 
+            </div>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label" for="tebex_title">{{ trans('tebex::admin.fields.shop_title') }}</label>

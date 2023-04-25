@@ -25,6 +25,7 @@ class SettingController extends Controller
             'tebex_key' => setting('tebex.key', ''),
             'tebex_shop_title' => setting('tebex.shop.title', ''),
             'tebex_shop_subtitle' => setting('tebex.shop.subtitle', ''),
+            'tebex_shop_vat' => setting('tebex.shop.vat', 0)
         ]);
     }
 
@@ -54,7 +55,9 @@ class SettingController extends Controller
                 'tebex.shop.title' => $request->input('tebex_title'),
                 'tebex.shop.subtitle' => $request->input('tebex_subtitle'),
                 'tebex.shop.home' => $request->has("home_status") ? true : false,
-                'tebex.shop.home.message' => $request->input('home_message')
+                'tebex.shop.home.message' => $request->input('home_message'),
+                'tebex.shop.vat.status' =>  $request->has("tebex_vat_status") ? true : false,
+                'tebex.shop.vat' =>  $request->input('tebex_vat')
             ]);
 
             return redirect()->route('tebex.admin.index')

@@ -55,7 +55,7 @@
                 <div class="row gy-4">
                     @forelse($categorie->packages as $package)
                         <div class="col-md-4">
-                            <div class="card h-100 p-2" onclick="showModal(`{{ $package->name }}`, `{{ $package->description }}`, '{{ $package->id }}', '{{ $package->price->discounted ? $package->price->discounted . tebex_currency_symbol() : $package->price->normal . tebex_currency_symbol() }}')">
+                            <div class="card h-100 p-2" onclick="showModal(`{{ $package->name }}`, `{{ $package->description }}`, `{{ $package->id }}`, `{{ $package->price->discounted ? $package->price->discounted . tebex_currency_symbol() : $package->price->normal . tebex_currency_symbol() }} {{ setting('tebex.shop.vat.status') ? trans('tebex::messages.vat.ttc') : trans('tebex::messages.vat.ht') }}`)">
                                 @if($package->image)
                                     <img class="card-img" draggable="false" src="{{ $package->image }}" alt="{{ $package->name }}">
                                 @endif
@@ -69,6 +69,7 @@
                                         @else
                                             {{ $package->price->normal . tebex_currency_symbol() }}
                                         @endif
+                                        <span><small>{{ setting('tebex.shop.vat.status') ? trans('tebex::messages.vat.ttc') : trans('tebex::messages.vat.ht') }}</small></span>
                                     </h5>
                                     <button class="btn btn-primary btn-block w-100">
                                         <i class="bi bi-eye"></i>
@@ -91,7 +92,7 @@
                     <div class="row gy-4">
                         @forelse($categorie->packages as $package)
                             <div class="col-md-4">
-                                <div class="card h-100 p-2" onclick="showModal(`{{ $package->name }}`, `{{ $package->description }}`, '{{ $package->id }}', '{{ $package->price->discounted ? $package->price->discounted . tebex_currency_symbol() : $package->price->normal . tebex_currency_symbol() }}')">
+                                <div class="card h-100 p-2" onclick="showModal(`{{ $package->name }}`, `{{ $package->description }}`, '{{ $package->id }}', '{{ $package->price->discounted ? $package->price->discounted . tebex_currency_symbol() : $package->price->normal . tebex_currency_symbol() }} {{ setting('tebex.shop.vat.status') ? trans('tebex::messages.vat.ttc') : trans('tebex::messages.vat.ht') }}')">
                                     @if($package->image)
                                         <img class="card-img" draggable="false" src="{{ $package->image }}" alt="{{ $package->name }}">
                                     @endif
@@ -105,6 +106,7 @@
                                             @else
                                                 {{ $package->price->normal . tebex_currency_symbol() }}
                                             @endif
+                                            <span><small>{{ setting('tebex.shop.vat.status') ? trans('tebex::messages.vat.ttc') : trans('tebex::messages.vat.ht') }}</small></span>
                                         </h5>
                                         <button class="btn btn-primary btn-block w-100">
                                             <i class="bi bi-eye"></i>

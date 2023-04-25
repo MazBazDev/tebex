@@ -18,7 +18,11 @@ return [
         'show' => 'Voir',
         'cancel' => 'Annuler'
     ],
-
+    'vat' => [
+        "status" => "Ajouter la Taxe/TVA",
+        "ttc" => "TTC",
+        "ht" => "HT"
+    ],
     'modal' => [
         'mc_pseudo' => 'Quelle est votre pseudo ?',
         "bad_username" => "Pseudo incorrect",

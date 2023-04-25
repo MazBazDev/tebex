@@ -18,7 +18,11 @@ return [
         'show' => 'Show',
         'cancel' => 'Cancel'
     ],
-
+    'vat' => [
+        "status" => "Add Tax/VAT",
+        "ttc" => "incl tax",
+        "ht" => "excl tax"
+    ],
     'modal' => [
         'mc_pseudo' => 'What is your username?',
         "bad_username" => "Incorrect username",

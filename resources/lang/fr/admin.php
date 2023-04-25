@@ -16,5 +16,6 @@ return [
         'currency' => 'Devise',
         'tebex_key' => 'Clé Tebex',
         'tebex_key_info' => 'Vous pouvez retrouver votre clé Tebex ici --> ',
+        'vat' => "Taxes/TVA pourcentage"
     ],
 ];
