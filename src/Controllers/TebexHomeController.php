@@ -38,7 +38,7 @@ class TebexHomeController extends Controller
                             'image' => $Product->image,
                             'description' => str_replace("'", "\'", $Product->description),
                             "price" => (object) array(
-                                "normal" => setting("tebex.shop.vat.status") ? $Product->price * (1 + setting("tebex.shop.vat") / 100) : $Product->price,
+                                "normal" => setting("tebex.shop.vat.status") ? round($Product->price * (1 + setting("tebex.shop.vat") / 100), 2) : $Product->price,
                                 "discounted" => null,
                                 "expire" => null,
                             ),
@@ -50,7 +50,7 @@ class TebexHomeController extends Controller
                                 case 'package': 
                                     foreach ($sales->effective->packages as $salePackage) {
                                         if ($salePackage == $Product->id) { 
-                                            $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
+                                            $price = $sales->discount->type == "percentage" ? round($Product->price * ((100 - $sales->discount->percentage) / 100), 2) : $Product->price - $sales->discount->value;
 
                                             $product->price->discounted = round($price, 2);
                                             $product->price->expire = date('d/m/y H:i:s', $sales->expire);
@@ -62,7 +62,7 @@ class TebexHomeController extends Controller
                                 case 'category':
                                     foreach ($sales->effective->categories as $saleCate) {
                                         if ($saleCate == $Product->category->id) {
-                                            $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
+                                            $price = $sales->discount->type == "percentage" ? round($Product->price * ((100 - $sales->discount->percentage) / 100), 2) : $Product->price - $sales->discount->value;
 
                                             $product->price->discounted = round($price, 2) ;
                                             $product->price->expire = date('d/m/y H:i:s', $sales->expire);
@@ -72,7 +72,7 @@ class TebexHomeController extends Controller
                                     };
                                     break;
                                 case 'all':
-                                    $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
+                                    $price = $sales->discount->type == "percentage" ? round($Product->price * ((100 - $sales->discount->percentage) / 100), 2) : $Product->price - $sales->discount->value;
 
                                     $product->price->discounted = round($price, 2);
                                     $product->price->expire = date('d/m/y H:i:s', $sales->expire);
@@ -110,7 +110,7 @@ class TebexHomeController extends Controller
                                     case 'package': 
                                         foreach ($sales->effective->packages as $salePackage) {
                                             if ($salePackage == $Product->id) { 
-                                                $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
+                                                $price = $sales->discount->type == "percentage" ? round($Product->price * ((100 - $sales->discount->percentage) / 100), 2) : $Product->price - $sales->discount->value;
     
                                                 $product->price->discounted = setting("tebex.shop.vat.status") ? round($price, 2) * (1 + setting("tebex.shop.vat") / 100) : round($price, 2);
                                                 $product->price->expire = date('d/m/y H:i:s', $sales->expire);
@@ -122,7 +122,7 @@ class TebexHomeController extends Controller
                                     case 'category':
                                         foreach ($sales->effective->categories as $saleCate) {
                                             if ($saleCate == $Product->category->id) {
-                                                $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
+                                                $price = $sales->discount->type == "percentage" ? round($Product->price * ((100 - $sales->discount->percentage) / 100), 2) : $Product->price - $sales->discount->value;
     
                                                 $product->price->discounted = setting("tebex.shop.vat.status") ? round($price, 2) * (1 + setting("tebex.shop.vat") / 100) : round($price, 2);
                                                 $product->price->expire = date('d/m/y H:i:s', $sales->expire);
@@ -132,7 +132,7 @@ class TebexHomeController extends Controller
                                         };
                                         break;
                                     case 'all':
-                                        $price = $sales->discount->type == "percentage" ? $Product->price * ((100 - $sales->discount->percentage) / 100) : $Product->price - $sales->discount->value;
+                                        $price = $sales->discount->type == "percentage" ? round($Product->price * ((100 - $sales->discount->percentage) / 100), 2) : $Product->price - $sales->discount->value;
     
                                         $product->price->discounted = setting("tebex.shop.vat.status") ? round($price, 2) * (1 + setting("tebex.shop.vat") / 100) : round($price, 2);
                                         $product->price->expire = date('d/m/y H:i:s', $sales->expire);
