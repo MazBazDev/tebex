@@ -21,7 +21,7 @@ if (! function_exists('tebex_currency')) {
     }
 }
 
-if (! function_exists('currency_symbol')) {
+if (! function_exists('tebex_currency_symbol')) {
     function tebex_currency_symbol(string $currency = null)
     {
         return Currencies::symbol($currency ?? tebex_currency());
