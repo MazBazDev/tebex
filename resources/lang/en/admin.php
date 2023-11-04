@@ -3,19 +3,19 @@
 return [
     'errors' => [
         'badApiKey' => 'Wrong Tebex key',
-        'noApiKey' => 'You must enter a Tebex api key',
-        'nickname' => 'Incorrect pseudo'
+        'noApiKey' => 'You must enter a Tebex API key',
+        'nickname' => 'Incorrect username'
     ],
 
     'permission' => 'Manage Tebex Plugin',
-    'title' => 'Tebex settings',
+    'title' => 'Tebex Settings',
 
     'fields' => [
-        'shop_title' => 'Shop title',
-        'shop_subtitle' => 'Shop subtitle',
+        'shop_title' => 'Shop Title',
+        'shop_subtitle' => 'Shop Subtitle',
         'currency' => 'Currency',
-        'tebex_key' => 'Tebex key',
-        'tebex_key_info' => 'You can find your Tebex key here --> ',
-        'vat' => "Tax/VAT percentage"
+        'tebex_key' => 'Tebex API Key',
+        'tebex_key_info' => 'You can find your Tebex API key here --> ',
+        'vat' => 'Tax/VAT Percentage'
     ],
 ];

@@ -2,35 +2,35 @@
 
 return [
     'errors' => [
-        'retry' => 'A problem occurred, please try again.',
+        'retry' => 'An issue occurred, please try again.',
     ],
- 
-    "shop" => "shop",
+
+    'shop' => 'Shop',
 
     'categories' => [
         'empty' => 'This category is empty.',
     ],
 
     'packages' => [
-        'empty' => 'No product',
+        'empty' => 'No products available',
         'buy' => 'Buy',
         'free' => 'Free',
         'show' => 'Show',
         'cancel' => 'Cancel'
     ],
     'vat' => [
-        "status" => "Add Tax/VAT",
-        "ttc" => "incl tax",
-        "ht" => "excl tax"
+        'status' => 'Add Tax/VAT',
+        'ttc' => 'incl. tax',
+        'ht' => 'excl. tax'
     ],
     'modal' => [
         'mc_pseudo' => 'What is your username?',
-        "bad_username" => "Incorrect username",
+        'bad_username' => 'Incorrect username',
     ],
     'home' => [
         'home' => 'Home',
-        'toogle' => 'Activate the shop home page',
-        'title' => 'Contents of the home page',
+        'toggle' => 'Activate the shop homepage',
+        'title' => 'Contents of the homepage',
         'placeholder' => 'Welcome to the shop!'
     ],
 ];
