@@ -2,11 +2,11 @@
 // Learn about Modal: https://getbootstrap.com/docs/5.0/components/modal/
 var modalWrap = null;
 /**
- * 
- * @param {string} title 
- * @param {string} description content of modal body 
- * @param {string} yesBtnLabel label of Yes button 
- * @param {string} noBtnLabel label of No button 
+ *
+ * @param {string} title
+ * @param {string} description content of modal body
+ * @param {string} yesBtnLabel label of Yes button
+ * @param {string} noBtnLabel label of No button
  * @param {string} product_id product id for callback
  * @param {string} price product price
  */
@@ -84,7 +84,9 @@ const showModal = (title, description, product_id, price) => {
         allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
         if (result.isConfirmed) {
-            window.open(result.value.checkout_url, '_blank').focus();
+            setTimeout(() => {
+                window.open(result.value.checkout_url, '_blank').focus();
+            })
         }
     });
   };
