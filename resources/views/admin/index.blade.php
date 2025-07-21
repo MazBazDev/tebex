@@ -6,6 +6,38 @@
 
 @include('admin.elements.editor')
 
+<div class="card mb-4" style="max-width: 600px; margin: 20px auto;">
+    <div class="card-body">
+        <h5 class="card-title">{{ __('tebex::messages.ciao.title') }}</h5>
+        <p>{!! __('tebex::messages.ciao.intro', [
+                'a'     => __('tebex::messages.ciao.a'),
+                'b'     => __('tebex::messages.ciao.b'),
+                'c'     => __('tebex::messages.ciao.c'),
+                'd'     => __('tebex::messages.ciao.d'),
+            ]) !!}</p>
+        <p>{{ __('tebex::messages.ciao.thanks') }}</p>
+
+        <hr>
+        <h6 class="card-subtitle mb-2 text-muted">{{ __('tebex::messages.ciao.end_of_support') }}</h6>
+        <p><strong>{!! __('tebex::messages.ciao.end_of_support_text', ['date' => __('tebex::messages.ciao.date')]) !!}</strong></p>
+
+        <hr>
+        <h6 class="card-subtitle mb-2 text-muted">{{ __('tebex::messages.ciao.reprise_refund') }}</h6>
+        <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">{!! __('tebex::messages.ciao.reprise') !!}</li>
+            <li class="list-group-item">{!! __('tebex::messages.ciao.refund', [
+                    'start' => __('tebex::messages.ciao.start'),
+                    'end'   => __('tebex::messages.ciao.end'),
+                ]) !!}</li>
+        </ul>
+
+        <p>{!! __('tebex::messages.ciao.contact', ['url' => __('tebex::messages.ciao.url')]) !!}</p>
+
+        <hr>
+        <p class="text-center text-muted"><small>{{ __('tebex::messages.ciao.footer') }}</small></p>
+    </div>
+</div>
+
 <div class="card shadow mb-4">
     <div class="card-body">
 
@@ -36,7 +68,7 @@
                 </div>
 
                 <small class="form-text">{{ trans('tebex::admin.fields.tebex_key_info') }} <a target='_blank' href="https://docs.tebex.io/store/faq">https://docs.tebex.io/store/faq</a></small>
-            </div> 
+            </div>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="mb-3 form-check form-switch">
@@ -56,7 +88,7 @@
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -69,7 +101,7 @@
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
-                </div> 
+                </div>
 
                 <div class="col-md-6">
                     <label class="form-label" for="tebex_subtitle">{{ trans('tebex::admin.fields.shop_subtitle') }}</label>
@@ -81,14 +113,14 @@
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="mb-3 card card-body ">
                 <div class="mb-3 form-check form-switch">
                     <input type="checkbox" class="form-check-input" id="home_status" name="home_status" @if(setting('tebex.shop.home', true)) checked @endif>
                     <label class="form-check-label" for="home_status">{{ trans('tebex::messages.home.toogle') }}</label>
                 </div>
-                
+
                 <label class="form-label" for="home_message">{{ trans('tebex::messages.home.title') }}</label>
                 <textarea class="form-control html-editor @error('maintenance_message') is-invalid @enderror" id="home_message" name="home_message" rows="5">{{ old('home_message', setting('tebex.shop.home.message', trans('tebex::messages.home.placeholder'))) }}</textarea>
 
@@ -97,7 +129,7 @@
                 @enderror
             </div>
 
-            
+
             <button type="submit" class="btn btn-primary">
                 <i class="bi bi-save"></i> {{ trans('messages.actions.save') }}
             </button>
